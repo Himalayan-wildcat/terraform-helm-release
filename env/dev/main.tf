@@ -55,10 +55,10 @@ resource "helm_release" "ojt" {
   name  = "wordpress"
   chart = "../../ojt"
 
-  values = [
-    templatefile("../../ojt/values.yaml.tpl", {
-      replicas = 1
-      tag      = "latest"
-    })
-  ]
+  # values = [
+  #   templatefile("../../ojt/values.yaml.tpl", {
+  #     replicas = 1
+  #     tag      = "latest"
+  #   })
+  # ]
 }

@@ -1,9 +1,9 @@
-replicaCount: ${replicas}
+replicaCount: 1
 
 image:
   repository: nginx
   pullPolicy: IfNotPresent
-  tag: ${tag}
+  tag: latest
 
 serviceAccount:
   create: true

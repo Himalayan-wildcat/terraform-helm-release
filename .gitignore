@@ -4,4 +4,7 @@
 auto-save-list
 .\#*
 
+tfplan
+*.tfvars
+
 !.gitkeep

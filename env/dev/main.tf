@@ -53,17 +53,16 @@ resource "helm_release" "argocd" {
 # }
 
 resource "helm_release" "argoproj_ojt" {
-  name       = "ojt-argoproj"
-  repository = "https://argoproj.github.io/argo-helm"
-  chart      = "argocd-apps"
-  version    = "0.0.8"
-  namespace  = "argocd"
+  name         = "ojt-argoproj"
+  repository   = "https://argoproj.github.io/argo-helm"
+  chart        = "argocd-apps"
+  version      = "0.0.8"
+  namespace    = "argocd"
+  force_update = true
 
   values = [
     templatefile("../../argoproj/ojt.yaml.tpl", {
-      # path = "env/ojt/generated"
-
-      value_file = "../env/dev/ojt_values.yaml"
+      value_files = ["../env/dev/ojt_values.yaml"]
     })
   ]
 

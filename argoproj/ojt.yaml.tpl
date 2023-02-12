@@ -3,12 +3,14 @@ applications:
   namespace: argocd
   project: default
   sources:
-   - repoURL: https://github.com/Himalayan-wildcat/terraform-helm-release.git
-     path: ojt
-     targetRevision: HEAD
-     helm:
-       valueFiles:
-         - ${value_file}
+  - repoURL: https://github.com/Himalayan-wildcat/terraform-helm-release.git
+    path: ojt
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+%{ for file in value_files ~}
+      - ${ file }
+%{ endfor ~}
   destination:
     server: https://kubernetes.default.svc
     namespace: default

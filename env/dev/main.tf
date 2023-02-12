@@ -39,26 +39,32 @@ resource "helm_release" "argocd" {
   # ]
 }
 
-resource "helm_release" "argocdapp_nginx" {
-  name       = "argocdapp-nginx"
+# resource "helm_release" "ojt" {
+#   name  = "ojt-app"
+#   chart = "../../ojt"
+
+#   values = [
+#     file("${path.module}/ojt_values.yaml")
+#   ]
+# }
+
+# output "ojt" {
+#   value = helm_release.ojt.manifest
+# }
+
+resource "helm_release" "argoproj_ojt" {
+  name       = "ojt-argoproj"
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argocd-apps"
   version    = "0.0.8"
   namespace  = "argocd"
 
   values = [
-    templatefile("../../argoproj/ojt.yaml.tpl", {})
+    templatefile("../../argoproj/ojt.yaml.tpl", {
+      # path = "env/ojt/generated"
+      value_file = "ojt_values.yaml"
+    })
   ]
-}
 
-resource "helm_release" "ojt" {
-  name  = "wordpress"
-  chart = "../../ojt"
-
-  # values = [
-  #   templatefile("../../ojt/values.yaml.tpl", {
-  #     replicas = 1
-  #     tag      = "latest"
-  #   })
-  # ]
+  // depends_on = [helm_release.ojt]
 }

@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "ojt.fullname" . }}
+  namespace: {{ include "ojt.namespace" . }}
   labels:
     {{- include "ojt.labels" . | nindent 4 }}
 spec:

@@ -6,6 +6,9 @@ applications:
    - repoURL: https://github.com/Himalayan-wildcat/terraform-helm-release.git
      path: ojt
      targetRevision: HEAD
+     helm:
+       valueFiles:
+         - ${value_file}
   destination:
     server: https://kubernetes.default.svc
     namespace: default

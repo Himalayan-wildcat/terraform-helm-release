@@ -6,38 +6,44 @@
 #   namespace  = "kube-system"
 # }
 
-resource "helm_release" "argocd" {
-  name             = "argocd"
-  repository       = "https://argoproj.github.io/argo-helm"
-  chart            = "argo-cd"
-  version          = "~> 5.20.0"
-  create_namespace = true
-  namespace        = "argocd"
+# resource "helm_release" "argocd" {
+#   name             = "argocd"
+#   repository       = "https://argoproj.github.io/argo-helm"
+#   chart            = "argo-cd"
+#   version          = "~> 5.20.0"
+#   create_namespace = true
+#   namespace        = "argocd"
 
-  set {
-    name  = "global.logging.level"
-    value = "info"
-  }
+#   set {
+#     name  = "global.logging.level"
+#     value = "info"
+#   }
 
-  set {
-    name  = "applicationSet.enabled"
-    value = "false"
-  }
+#   set {
+#     name  = "applicationSet.enabled"
+#     value = "false"
+#   }
 
-  set {
-    name  = "configs.params.server.insecure"
-    value = "true"
-  }
+#   set {
+#     name  = "configs.params.server.insecure"
+#     value = "true"
+#   }
 
-  # set {
-  #   name = "server.service.type"
-  #   value = "NodePort"
-  # }
+#   set {
+#     name  = "crds.keep"
+#     value = "false"
+#   }
 
-  # values = [
-  #   "${file("values.yaml")}"
-  # ]
-}
+#   set {
+#     name  = "server.service.type"
+#     value = "NodePort"
+#   }
+
+#   set {
+#     name  = "server.service.nodePortHttp"
+#     value = "30001"
+#   }
+# }
 
 # resource "helm_release" "ojt" {
 #   name  = "ojt-app"
@@ -52,19 +58,19 @@ resource "helm_release" "argocd" {
 #   value = helm_release.ojt.manifest
 # }
 
-resource "helm_release" "argoproj_ojt" {
-  name         = "ojt-argoproj"
-  repository   = "https://argoproj.github.io/argo-helm"
-  chart        = "argocd-apps"
-  version      = "0.0.8"
-  namespace    = "argocd"
-  force_update = true
+# resource "helm_release" "argoproj_ojt" {
+#   name         = "ojt-argoproj"
+#   repository   = "https://argoproj.github.io/argo-helm"
+#   chart        = "argocd-apps"
+#   version      = "0.0.8"
+#   namespace    = "argocd"
+#   force_update = true
 
-  values = [
-    templatefile("../../argoproj/ojt.yaml.tpl", {
-      value_files = ["../env/dev/ojt_values.yaml"]
-    })
-  ]
+#   values = [
+#     templatefile("../../argoproj/ojt.yaml.tpl", {
+#       value_files = ["../env/dev/ojt_values.yaml"]
+#     })
+#   ]
 
-  // depends_on = [helm_release.ojt]
-}
+#   // depends_on = [helm_release.ojt]
+# }

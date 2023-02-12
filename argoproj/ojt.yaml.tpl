@@ -26,11 +26,11 @@ applications:
         factor: 2
         maxDuration: 3m
     syncOptions:
-    - ServerSideApply=true
+    # - ServerSideApply=true
+    # - PrunePropagationPolicy=foreground
     - Validate=true
     - CreateNamespace=false
     - ApplyOutOfSyncOnly=true
-    - PrunePropagationPolicy=foreground
     - PruneLast=true
   revisionHistoryLimit: 1
   # ignoreDifferences:

@@ -63,7 +63,7 @@ resource "helm_release" "argoproj_ojt" {
     templatefile("../../argoproj/ojt.yaml.tpl", {
       # path = "env/ojt/generated"
 
-      value_file = "env/dev/ojt_values.yaml"
+      value_file = "../env/dev/ojt_values.yaml"
     })
   ]
 
